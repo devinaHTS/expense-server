@@ -10,14 +10,14 @@ app.use(bodyParser.json())
 
 app.use(cors())
 
-app.get("/",(req,res)=>{
+app.get("/api1",(req,res)=>{
     res.send(`Email server is rinning at port:${process.env.PORT || 3001}`)
 })
 
-app.post("/", cors(), async (req, res) => {
+app.post("/api2", cors(), async (req, res) => {
     let { mailOptions } = req.body
     let transporter = nodemailer.createTransport({
-        service: 'smtp.gmail.com',
+        service: 'gmail',
         auth: {
             user: process.env.EMAIL,
             pass: process.env.PASSWORD,
