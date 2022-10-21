@@ -26,9 +26,12 @@ app.post("/", cors(), async (req, res) => {
     console.log(mailOptions)
     await transporter.sendMail(mailOptions, function(err, data) {
         if (err) {
-            console.log("Error", err);
+          res.status(500).json({ success: false, message: err.message });
         } else {
-            console.log("Email Sent!!!");
+          console.log("Email Sent!!!");
+          res
+            .status(200)
+            .json({ success: true, message: "mail sent successfuly" });
         }
     });
 })
