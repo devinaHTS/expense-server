@@ -24,11 +24,10 @@ app.post("/", cors(), async (req, res) => {
         }
     })
     console.log(mailOptions)
-    await transporter.sendMail(mailOptions, function(err, data) {
+     transporter.sendMail(mailOptions, function(err, data) {
         if (err) {
-          res.status(500).json({ success: false, message: err.message, dataRecieved:req.body, env:process.env });
+          res.status(500).json({ success: false,message:"Internal server error", error: err.message });
         } else {
-          console.log("Email Sent!!!");
           res
             .status(200)
             .json({ success: true, message: "mail sent successfuly" });
