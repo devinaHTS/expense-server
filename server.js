@@ -17,7 +17,7 @@ app.get("/api1",(req,res)=>{
 app.post("/api2", cors(), async (req, res) => {
     let { mailOptions } = req.body
     let transporter = nodemailer.createTransport({
-        service: 'gmail',
+        service: 'smtp.gmail.com',
         auth: {
             user: process.env.EMAIL,
             pass: process.env.PASSWORD,
