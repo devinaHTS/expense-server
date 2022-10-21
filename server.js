@@ -10,6 +10,10 @@ app.use(bodyParser.json())
 
 app.use(cors())
 
+app.get("/",(req,res)=>{
+    res.send(`Email server is rinning at port:${process.env.PORT || 3001}`)
+})
+
 app.post("/", cors(), async (req, res) => {
     let { mailOptions } = req.body
     let transporter = nodemailer.createTransport({
