@@ -19,12 +19,12 @@ app.post("/api2", async (req, res) => {
     let email1 = mailOptions.from;
     let email2 = mailOptions.to;
     let subject = mailOptions.subject;
-    let message = mailOptions.text;
+    let message = mailOptions.html;
     let newmail = {
         from : email1,
         to: email2,
         subject: subject,
-        text: message
+        html: message
     }
     let transporter = nodemailer.createTransport({
         service: 'gmail',
