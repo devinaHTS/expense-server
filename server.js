@@ -33,7 +33,6 @@ app.post("/api2", async (req, res) => {
             pass: process.env.PASSWORD,
         }
     })
-    console.log(newmail, email1, email2, subject, message)
      transporter.sendMail(newmail, function(err, data) {
         if (err) {
           res.status(500).json({ success: false,message:"Internal server error", error: err.message });
@@ -46,5 +45,4 @@ app.post("/api2", async (req, res) => {
 })
 
 app.listen(process.env.PORT || 3001, () => {
-    console.log("Server Started!!")
 });
