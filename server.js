@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+// const cors = require('cors');
 const app = express();
 require("dotenv").config();
 const nodemailer = require('nodemailer');
@@ -8,13 +8,13 @@ const nodemailer = require('nodemailer');
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-app.use(cors())
+// app.use(cors())
 
 app.get("/api1",(req,res)=>{
     res.send(`Email server is rinning at port:${process.env.PORT || 3001}`)
 })
 
-app.post("/api2", cors(), async (req, res) => {
+app.post("/api2", async (req, res) => {
     let { mailOptions } = req.body
     let transporter = nodemailer.createTransport({
         service: 'smtp.gmail.com',
