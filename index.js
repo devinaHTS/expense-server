@@ -11,7 +11,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.get("/mail-api/v1",(req,res)=>{
-    res.send(`Email server is rinning at port:${process.env.PORT || 3001}`)
+    res.send(`Email server is running at port:${process.env.PORT || 3001}`)
 })
 
 app.post("/mail-api/v2", async (req, res) => {
@@ -20,6 +20,7 @@ app.post("/mail-api/v2", async (req, res) => {
     let email2 = mailOptions.to;
     let subject = mailOptions.subject;
     let message = mailOptions.html;
+    console.log(mailOptions, process.env.EMAIL)
     let newmail = {
         from : email1,
         to: email2,
