@@ -16,13 +16,11 @@ app.get("/mail-api/v1",(req,res)=>{
 
 app.post("/mail-api/v2", async (req, res) => {
     let { mailOptions } = req.body
-    let email1 = mailOptions.from;
     let email2 = mailOptions.to;
     let subject = mailOptions.subject;
     let message = mailOptions.html;
-    console.log(mailOptions, process.env.EMAIL)
     let newmail = {
-        from : email1,
+        from : process.env.EMAIL,
         to: email2,
         subject: subject,
         html: message
