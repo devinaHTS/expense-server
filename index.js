@@ -1,14 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');require("dotenv").config();
+const cors = require('cors');
+require("dotenv").config();
 const app = express();
 
 const nodemailer = require('nodemailer');
 
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true }))
+app.use(bodyParser.json({ limit: '10mb' }));
 
-app.use(cors())
+app.use(cors());
 
 app.get("/mail-api/v1",(req,res)=>{
     res.send(`Email server is running at port:${process.env.PORT || 3001}`)
@@ -16,26 +17,21 @@ app.get("/mail-api/v1",(req,res)=>{
 
 app.post("/mail-api/v2", async (req, res) => {
     let { mailOptions } = req.body
-    let email2 = mailOptions.to;
-    let subject = mailOptions.subject;
-    let message = mailOptions.html;
-    let newmail = {
-        from : process.env.EMAIL,
-        to: email2,
-        subject: subject,
-        html: message
+    const newmail = {
+        ...mailOptions,
+        from : process.env.EMAIL
     }
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: process.env.EMAIL,
-            pass: process.env.PASSWORD,
+            user: process.env.EMAIL, 
+            pass: process.env.PASSWORD 
         }
     })
      transporter.sendMail(newmail, function(err, data) {
         if (err) {
             console.log(err)
-          res.status(500).json({ success: false,message:"Internal server error", error: err.message });
+          res.status(500).json({ success: false,message:"Internal server error", error: err });
         } else {
           res
             .status(200)
