@@ -11,10 +11,6 @@ app.use(bodyParser.json({ limit: '10mb' }));
 
 app.use(cors());
 
-app.get("/mail-api/v1",(req,res)=>{
-    res.send(`Email server is running at port:${process.env.PORT || 3001}`)
-})
-
 app.post("/mail-api/v2", async (req, res) => {
     let { mailOptions } = req.body
     const newmail = {
